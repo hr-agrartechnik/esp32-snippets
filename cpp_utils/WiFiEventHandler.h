@@ -22,15 +22,15 @@
  * wifi.startAP("MYSSID", "password");
  *
  * The overridable functions are:
- * * esp_err_t apStaConnected(system_event_ap_staconnected_t info)
- * * esp_err_t apStaDisconnected(system_event_ap_stadisconnected_t info)
+ * * esp_err_t apStaConnected(wifi_event_ap_staconnected_t info)
+ * * esp_err_t apStaDisconnected(wifi_event_ap_stadisconnected_t info)
  * * esp_err_t apStart()
  * * esp_err_t apStop()
- * * esp_err_t staConnected(system_event_sta_connected_t info)
- * * esp_err_t staDisconnected(system_event_sta_disconnected_t info)
- * * esp_err_t staGotIp(system_event_sta_got_ip_t info)
- * * esp_err_t staScanDone(system_event_sta_scan_done_t info)
- * * esp_err_t staAuthChange(system_event_sta_authmode_change_t info)
+ * * esp_err_t staConnected(wifi_event_sta_connected_t info)
+ * * esp_err_t staDisconnected(wifi_event_sta_disconnected_t info)
+ * * esp_err_t staGotIp(wifi_event_sta_got_ip_t info)
+ * * esp_err_t staScanDone(wifi_event_sta_scan_done_t info)
+ * * esp_err_t staAuthChange(wifi_event_sta_authmode_change_t info)
  * * esp_err_t staStart()
  * * esp_err_t staStop()
  * * esp_err_t wifiReady()
@@ -59,19 +59,19 @@ using namespace std;
  *   return ESP_OK;
  * }
  *
- * esp_err_t MyHandler::staConnected(system_event_sta_connected_t info) {
+ * esp_err_t MyHandler::staConnected(wifi_event_sta_connected_t info) {
  *   return ESP_OK;
  * }
  *
- * esp_err_t MyHandler::staDisconnected(system_event_sta_disconnected_t info) {
+ * esp_err_t MyHandler::staDisconnected(wifi_event_sta_disconnected_t info) {
  *   return ESP_OK;
  * }
  *
- * esp_err_t MyHandler::apStaConnected(system_event_ap_staconnected_t info) {
+ * esp_err_t MyHandler::apStaConnected(wifi_event_ap_staconnected_t info) {
  *   return ESP_OK;
  * }
  *
- * esp_err_t MyHandler::apStaDisconnected(system_event_ap_stadisconnected_t info) {
+ * esp_err_t MyHandler::apStaDisconnected(wifi_event_ap_stadisconnected_t info) {
  *   return ESP_OK;
  * }
  *
@@ -79,15 +79,15 @@ using namespace std;
  *   return ESP_OK;
  * }
  *
- * esp_err_t MyHandler::staGotIp(system_event_sta_got_ip_t info) {
+ * esp_err_t MyHandler::staGotIp(ip_event_got_ip_t info) {
  *   return ESP_OK;
  * }
  *
- * esp_err_t MyHandler::staScanDone(system_event_sta_scan_done_t info) {
+ * esp_err_t MyHandler::staScanDone(wifi_event_sta_scan_done_t info) {
  *   return ESP_OK;
  * }
  *
- * esp_err_t MyHandler::staAuthChange(system_event_sta_authmode_change_t info) {
+ * esp_err_t MyHandler::staAuthChange(wifi_event_sta_authmode_change_t info) {
  *   return ESP_OK;
  * }
  *
