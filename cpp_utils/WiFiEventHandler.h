@@ -38,9 +38,10 @@
 
 #ifndef MAIN_WIFIEVENTHANDLER_H_
 #define MAIN_WIFIEVENTHANDLER_H_
-#include <esp_event.h>
-#include <esp_event_loop.h>
-
+#include "esp_event_cxx.hpp"
+#include "esp_event.h"
+using namespace idf::event;
+using namespace std;
 /**
  * @brief %WiFi state event handler.
  *
@@ -99,19 +100,18 @@ class WiFiEventHandler {
 public:
 	WiFiEventHandler();
 	virtual ~WiFiEventHandler();
-	virtual esp_err_t apStaConnected(system_event_ap_staconnected_t info);
-	virtual esp_err_t apStaDisconnected(system_event_ap_stadisconnected_t info);
-	virtual esp_err_t apStart();
-	virtual esp_err_t apStop();
-	system_event_cb_t getEventHandler();
-	virtual esp_err_t staConnected(system_event_sta_connected_t info);
-	virtual esp_err_t staDisconnected(system_event_sta_disconnected_t info);
-	virtual esp_err_t staGotIp(system_event_sta_got_ip_t info);
-	virtual esp_err_t staScanDone(system_event_sta_scan_done_t info);
-	virtual esp_err_t staAuthChange(system_event_sta_authmode_change_t info);
-	virtual esp_err_t staStart();
-	virtual esp_err_t staStop();
-	virtual esp_err_t wifiReady();
+	virtual void apStaConnected(wifi_event_ap_staconnected_t* info);
+	virtual void apStaDisconnected(wifi_event_ap_stadisconnected_t* info);
+	virtual void apStart();
+	virtual void apStop();
+	virtual void staConnected(wifi_event_sta_connected_t* info);
+	virtual void staDisconnected(wifi_event_sta_disconnected_t* info);
+	virtual void staGotIp(ip_event_got_ip_t* info);
+	virtual void staScanDone(wifi_event_sta_scan_done_t* info);
+	virtual void staAuthChange(wifi_event_sta_authmode_change_t* info);
+	virtual void staStart();
+	virtual void staStop();
+	virtual void wifiReady();
 
 	/**
 	 * Get the next WiFi event handler in the chain, if there is one.
@@ -132,8 +132,19 @@ public:
 private:
 	friend class WiFi;
 	WiFiEventHandler *m_nextHandler;
-	static esp_err_t eventHandler(void* ctx, system_event_t* event);
-
+	void callback_debug(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_AP_START(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_AP_STOP(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_AP_STACONNECTED(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_AP_STADISCONNECTED(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_SCAN_DONE(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_STA_AUTHMODE_CHANGE(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_STA_CONNECTED(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_STA_DISCONNECTED(const ESPEvent &event, void *data);
+	void callback_IP_EVENT_STA_GOT_IP(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_STA_START(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_STA_STOP(const ESPEvent &event, void *data);
+	void callback_WIFI_EVENT_WIFI_READY(const ESPEvent &event, void *data);
 };
 
 #endif /* MAIN_WIFIEVENTHANDLER_H_ */
